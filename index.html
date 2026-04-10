@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="NutriLife — A smart food and health app that helps you make better food choices, track meals, and build healthier eating habits with real nutritional data." />
+  <meta property="og:title" content="NutriLife — Food & Health App" />
+  <meta property="og:description" content="Track your nutrition, log meals, get smart food recommendations, and build healthier eating habits." />
+  <title>NutriLife — Food & Health App</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Animated Background -->
+  <div class="bg-animation">
+    <div class="orb"></div>
+    <div class="orb"></div>
+    <div class="orb"></div>
+  </div>
+
+  <div class="app-layout">
+
+    <!-- ===== Sidebar Navigation ===== -->
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar__logo">
+        <div class="sidebar__logo-icon">🥗</div>
+        <div class="sidebar__logo-text">
+          <h2>NutriLife</h2>
+          <span>Food &amp; Health</span>
+        </div>
+      </div>
+
+      <div class="sidebar__nav" id="sidebar-nav">
+        <a class="nav-item active" data-section="dashboard" href="#dashboard">
+          <span class="nav-item__icon">📊</span> Dashboard
+        </a>
+        <a class="nav-item" data-section="scanner" href="#scanner">
+          <span class="nav-item__icon">🔍</span> Food Scanner
+        </a>
+        <a class="nav-item" data-section="tracker" href="#tracker">
+          <span class="nav-item__icon">🍽️</span> Meal Tracker
+        </a>
+        <a class="nav-item" data-section="profile" href="#profile">
+          <span class="nav-item__icon">👤</span> Health Profile
+        </a>
+        <a class="nav-item" data-section="suggestions" href="#suggestions">
+          <span class="nav-item__icon">💡</span> Smart Tips
+        </a>
+        <a class="nav-item" data-section="hydration" href="#hydration">
+          <span class="nav-item__icon">💧</span> Hydration
+        </a>
+        <a class="nav-item" data-section="insights" href="#insights">
+          <span class="nav-item__icon">📈</span> Weekly Insights
+        </a>
+      </div>
+
+      <div class="sidebar__score">
+        <div class="sidebar__score-label">Health Score</div>
+        <div class="sidebar__score-value" id="health-score">72</div>
+        <div class="sidebar__score-max">/ 100</div>
+      </div>
+    </nav>
+
+    <!-- ===== Main Content ===== -->
+    <main class="main-content">
+
+      <!-- ===== DASHBOARD ===== -->
+      <section class="section active" id="dashboard">
+        <div class="dashboard__greeting">
+          <h2>Good <span id="time-greeting">Morning</span> 👋</h2>
+          <p>Here's your nutrition summary for today, <span id="today-date"></span></p>
+        </div>
+
+        <div class="dashboard__rings-row" id="dashboard-rings">
+          <!-- Calories Ring -->
+          <div class="ring-card">
+            <svg viewBox="0 0 120 120">
+              <circle class="ring-bg" cx="60" cy="60" r="50"/>
+              <circle class="ring-progress calories" cx="60" cy="60" r="50"
+                stroke-dasharray="314.16" stroke-dashoffset="314.16" id="ring-calories"/>
+              <text x="60" y="56" text-anchor="middle" fill="#f1f5f9" font-size="18" font-weight="800" style="transform:rotate(90deg);transform-origin:center;" id="ring-calories-text">0</text>
+              <text x="60" y="72" text-anchor="middle" fill="#64748b" font-size="8" style="transform:rotate(90deg);transform-origin:center;">kcal</text>
+            </svg>
+            <div class="ring-card__label">Calories</div>
+            <div class="ring-card__value" id="cal-consumed">0</div>
+            <div class="ring-card__target">of <span id="cal-target">2000</span> kcal</div>
+          </div>
+          <!-- Protein Ring -->
+          <div class="ring-card">
+            <svg viewBox="0 0 120 120">
+              <circle class="ring-bg" cx="60" cy="60" r="50"/>
+              <circle class="ring-progress protein" cx="60" cy="60" r="50"
+                stroke-dasharray="314.16" stroke-dashoffset="314.16" id="ring-protein"/>
+              <text x="60" y="56" text-anchor="middle" fill="#f1f5f9" font-size="18" font-weight="800" style="transform:rotate(90deg);transform-origin:center;" id="ring-protein-text">0</text>
+              <text x="60" y="72" text-anchor="middle" fill="#64748b" font-size="8" style="transform:rotate(90deg);transform-origin:center;">g</text>
+            </svg>
+            <div class="ring-card__label">Protein</div>
+            <div class="ring-card__value" id="pro-consumed">0g</div>
+            <div class="ring-card__target">of <span id="pro-target">60</span>g</div>
+          </div>
+          <!-- Carbs Ring -->
+          <div class="ring-card">
+            <svg viewBox="0 0 120 120">
+              <circle class="ring-bg" cx="60" cy="60" r="50"/>
+              <circle class="ring-progress carbs" cx="60" cy="60" r="50"
+                stroke-dasharray="314.16" stroke-dashoffset="314.16" id="ring-carbs"/>
+              <text x="60" y="56" text-anchor="middle" fill="#f1f5f9" font-size="18" font-weight="800" style="transform:rotate(90deg);transform-origin:center;" id="ring-carbs-text">0</text>
+              <text x="60" y="72" text-anchor="middle" fill="#64748b" font-size="8" style="transform:rotate(90deg);transform-origin:center;">g</text>
+            </svg>
+            <div class="ring-card__label">Carbs</div>
+            <div class="ring-card__value" id="carb-consumed">0g</div>
+            <div class="ring-card__target">of <span id="carb-target">250</span>g</div>
+          </div>
+          <!-- Fat Ring -->
+          <div class="ring-card">
+            <svg viewBox="0 0 120 120">
+              <circle class="ring-bg" cx="60" cy="60" r="50"/>
+              <circle class="ring-progress fat" cx="60" cy="60" r="50"
+                stroke-dasharray="314.16" stroke-dashoffset="314.16" id="ring-fat"/>
+              <text x="60" y="56" text-anchor="middle" fill="#f1f5f9" font-size="18" font-weight="800" style="transform:rotate(90deg);transform-origin:center;" id="ring-fat-text">0</text>
+              <text x="60" y="72" text-anchor="middle" fill="#64748b" font-size="8" style="transform:rotate(90deg);transform-origin:center;">g</text>
+            </svg>
+            <div class="ring-card__label">Fat</div>
+            <div class="ring-card__value" id="fat-consumed">0g</div>
+            <div class="ring-card__target">of <span id="fat-target">65</span>g</div>
+          </div>
+        </div>
+
+        <div class="dashboard__summary">
+          <div class="summary-card">
+            <div class="summary-card__icon meals">🍽️</div>
+            <div class="summary-card__text">
+              <h4 id="meals-count">0 Meals</h4>
+              <p>logged today</p>
+            </div>
+          </div>
+          <div class="summary-card">
+            <div class="summary-card__icon water">💧</div>
+            <div class="summary-card__text">
+              <h4 id="water-summary">0 ml</h4>
+              <p>water intake</p>
+            </div>
+          </div>
+          <div class="summary-card">
+            <div class="summary-card__icon streak">🔥</div>
+            <div class="summary-card__text">
+              <h4 id="streak-count">0 Days</h4>
+              <p>tracking streak</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== FOOD SCANNER ===== -->
+      <section class="section" id="scanner">
+        <div class="section__header">
+          <h1 class="section__title">🔍 Food Scanner</h1>
+          <p class="section__subtitle">Search any food to see its nutritional breakdown</p>
+        </div>
+
+        <div class="scanner__search-box">
+          <span class="scanner__search-icon">🔎</span>
+          <input type="text" id="food-search" placeholder="Search foods... (e.g. apple, dal, paneer, chicken)" autocomplete="off" />
+        </div>
+        <div class="scanner__loading" id="search-loading">
+          <p>⏳ Searching foods...</p>
+        </div>
+        <div class="food-results" id="food-results"></div>
+      </section>
+
+      <!-- ===== MEAL TRACKER ===== -->
+      <section class="section" id="tracker">
+        <div class="section__header">
+          <h1 class="section__title">🍽️ Meal Tracker</h1>
+          <p class="section__subtitle">Log your meals and track daily nutrition</p>
+        </div>
+
+        <div class="tracker__tabs" id="meal-tabs">
+          <button class="tracker__tab active" data-meal="breakfast">🌅 Breakfast</button>
+          <button class="tracker__tab" data-meal="lunch">☀️ Lunch</button>
+          <button class="tracker__tab" data-meal="dinner">🌙 Dinner</button>
+          <button class="tracker__tab" data-meal="snacks">🍿 Snacks</button>
+        </div>
+
+        <div class="glass-card">
+          <div class="tracker__content" id="meal-content">
+            <div class="logged-empty" id="meal-empty">
+              <div class="logged-empty__icon">🍽️</div>
+              <p>No foods logged yet. Use the Food Scanner to add items!</p>
+            </div>
+            <div id="meal-items"></div>
+          </div>
+          <div class="tracker__total">
+            <span class="tracker__total-label">Meal Total</span>
+            <span class="tracker__total-value" id="meal-total">0 kcal</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== HEALTH PROFILE ===== -->
+      <section class="section" id="profile">
+        <div class="section__header">
+          <h1 class="section__title">👤 Health Profile</h1>
+          <p class="section__subtitle">Set your personal health goals and targets</p>
+        </div>
+
+        <div class="profile__grid">
+          <div class="glass-card">
+            <div class="profile__form-fields">
+              <div class="form-group">
+                <label for="profile-name">Name</label>
+                <input type="text" id="profile-name" placeholder="Your name" />
+              </div>
+              <div class="form-group">
+                <label for="profile-age">Age</label>
+                <input type="number" id="profile-age" placeholder="25" min="10" max="120" />
+              </div>
+              <div class="form-group">
+                <label for="profile-gender">Gender</label>
+                <select id="profile-gender">
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="profile-weight">Weight (kg)</label>
+                <input type="number" id="profile-weight" placeholder="70" min="20" max="300" step="0.1" />
+              </div>
+              <div class="form-group">
+                <label for="profile-height">Height (cm)</label>
+                <input type="number" id="profile-height" placeholder="170" min="100" max="250" />
+              </div>
+              <div class="form-group">
+                <label for="profile-activity">Activity Level</label>
+                <select id="profile-activity">
+                  <option value="1.2">Sedentary (little/no exercise)</option>
+                  <option value="1.375">Lightly Active (1-3 days/week)</option>
+                  <option value="1.55" selected>Moderately Active (3-5 days/week)</option>
+                  <option value="1.725">Very Active (6-7 days/week)</option>
+                  <option value="1.9">Extra Active (athlete)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="profile-goal">Goal</label>
+                <select id="profile-goal">
+                  <option value="lose">Lose Weight</option>
+                  <option value="maintain" selected>Maintain Weight</option>
+                  <option value="gain">Gain Weight</option>
+                </select>
+              </div>
+              <button class="profile__save-btn" id="save-profile">💾 Save Profile</button>
+            </div>
+          </div>
+
+          <div class="profile__stats-panel">
+            <div class="bmi-card glass-card">
+              <div class="ring-card__label">Body Mass Index</div>
+              <div class="bmi-card__value" id="bmi-value">—</div>
+              <span class="bmi-card__category normal" id="bmi-category">Set your profile</span>
+            </div>
+            <div class="daily-targets glass-card">
+              <h4>📋 Daily Targets</h4>
+              <div class="target-row">
+                <span class="target-row__label">Calories</span>
+                <span class="target-row__value" id="target-cal" style="color:var(--amber)">2000 kcal</span>
+              </div>
+              <div class="target-row">
+                <span class="target-row__label">Protein</span>
+                <span class="target-row__value" id="target-pro" style="color:var(--blue)">60g</span>
+              </div>
+              <div class="target-row">
+                <span class="target-row__label">Carbs</span>
+                <span class="target-row__value" id="target-carb" style="color:var(--emerald)">250g</span>
+              </div>
+              <div class="target-row">
+                <span class="target-row__label">Fat</span>
+                <span class="target-row__value" id="target-fat" style="color:var(--pink)">65g</span>
+              </div>
+              <div class="target-row">
+                <span class="target-row__label">Water</span>
+                <span class="target-row__value" id="target-water" style="color:var(--cyan)">2500 ml</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== SMART SUGGESTIONS ===== -->
+      <section class="section" id="suggestions">
+        <div class="section__header">
+          <h1 class="section__title">💡 Smart Suggestions</h1>
+          <p class="section__subtitle">Personalized food recommendations based on your remaining nutrition budget</p>
+        </div>
+        <div class="suggestions__grid" id="suggestions-grid">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+
+      <!-- ===== HYDRATION ===== -->
+      <section class="section" id="hydration">
+        <div class="section__header">
+          <h1 class="section__title">💧 Hydration Tracker</h1>
+          <p class="section__subtitle">Stay hydrated — track your daily water intake</p>
+        </div>
+
+        <div class="glass-card">
+          <div class="hydration__layout">
+            <div class="hydration__visual">
+              <div class="water-glass">
+                <div class="water-glass__fill" id="water-fill" style="height: 0%"></div>
+              </div>
+              <div class="hydration__percent" id="water-percent">0%</div>
+              <div class="hydration__amount"><span id="water-current">0</span> / <span id="water-goal">2500</span> ml</div>
+            </div>
+            <div class="hydration__controls">
+              <div class="hydration__btns">
+                <button class="hydration__btn" data-amount="150">🥤 150ml</button>
+                <button class="hydration__btn" data-amount="250">🥛 250ml</button>
+                <button class="hydration__btn" data-amount="500">🍶 500ml</button>
+                <button class="hydration__btn" data-amount="750">🫗 750ml</button>
+              </div>
+              <button class="hydration__reset" id="water-reset">↺ Reset Today</button>
+              <div class="hydration__log" id="hydration-log">
+                <h4>Today's Log</h4>
+                <div class="hydration__log-items" id="water-log-items"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== WEEKLY INSIGHTS ===== -->
+      <section class="section" id="insights">
+        <div class="section__header">
+          <h1 class="section__title">📈 Weekly Insights</h1>
+          <p class="section__subtitle">Your nutrition trends over the past 7 days</p>
+        </div>
+
+        <div class="insights__grid">
+          <div class="chart-card">
+            <h3>📊 Daily Calorie Intake</h3>
+            <div class="bar-chart" id="weekly-chart">
+              <!-- Bars populated by JS -->
+            </div>
+          </div>
+          <div class="insights__stats-panel">
+            <div class="insight-stat">
+              <div class="insight-stat__icon">📈</div>
+              <div class="insight-stat__value" id="insight-avg">—</div>
+              <div class="insight-stat__label">Avg Calories</div>
+            </div>
+            <div class="insight-stat">
+              <div class="insight-stat__icon">🏆</div>
+              <div class="insight-stat__value" id="insight-best">—</div>
+              <div class="insight-stat__label">Best Day</div>
+            </div>
+            <div class="insight-stat">
+              <div class="insight-stat__icon">🔥</div>
+              <div class="insight-stat__value" id="insight-streak">0</div>
+              <div class="insight-stat__label">Day Streak</div>
+            </div>
+            <div class="insight-stat">
+              <div class="insight-stat__icon">🎯</div>
+              <div class="insight-stat__value" id="insight-ontrack">—</div>
+              <div class="insight-stat__label">Days on Target</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ===== Mobile Bottom Nav ===== -->
+  <nav class="mobile-nav" id="mobile-nav">
+    <button class="mobile-nav__item active" data-section="dashboard">
+      <span class="mobile-nav__item-icon">📊</span> Home
+    </button>
+    <button class="mobile-nav__item" data-section="scanner">
+      <span class="mobile-nav__item-icon">🔍</span> Scan
+    </button>
+    <button class="mobile-nav__item" data-section="tracker">
+      <span class="mobile-nav__item-icon">🍽️</span> Meals
+    </button>
+    <button class="mobile-nav__item" data-section="hydration">
+      <span class="mobile-nav__item-icon">💧</span> Water
+    </button>
+    <button class="mobile-nav__item" data-section="insights">
+      <span class="mobile-nav__item-icon">📈</span> Insights
+    </button>
+  </nav>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
